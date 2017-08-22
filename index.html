@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Garden</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="newstyle.css">
+  <link rel="stylesheet" type="text/css" href="navbar.css">
+</head>
+<style>
+  /*password mask*/
+#password + .unmask {
+  position: absolute;
+  right: 80px;
+  top: 140px;
+  text-indent: -9999px;
+  width: 25px;
+  height: 25px;
+  background: #aaa;
+  border-radius: 50%;
+  cursor:pointer;
+  border: none;
+  -webkit-appearance:none;
+}
+
+#password + .unmask:before {
+  content: "";
+  position:absolute;
+  top:4px; left:4px;
+  width: 17px;
+  height: 17px;
+  background: #e3e3e3;
+  z-index:1;
+  border-radius: 50%;
+}
+#password[type="password"] + .unmask:after {
+  content: "";
+  position:absolute;
+  top:6px; left:6px;
+  width: 13px;
+  height: 13px;
+  background: #aaa;
+  z-index:2;
+  border-radius: 50%;
+}
+#signpwd + .unmask {
+  position: absolute;
+  right: 70px;
+  top: 202px;
+  text-indent: -9999px;
+  width: 25px;
+  height: 25px;
+  background: #aaa;
+  border-radius: 50%;
+  cursor:pointer;
+  border: none;
+  -webkit-appearance:none;
+}
+
+#signpwd + .unmask:before {
+  content: "";
+  position:absolute;
+  top:4px; left:4px;
+  width: 17px;
+  height: 17px;
+  background: #e3e3e3;
+  z-index:1;
+  border-radius: 50%;
+}
+#signpwd[type="password"] + .unmask:after {
+  content: "";
+  position:absolute;
+  top:6px; left:6px;
+  width: 13px;
+  height: 13px;
+  background: #aaa;
+  z-index:2;
+  border-radius: 50%;
+}
+</style>
+<script>
+
+</script>
+<body>
+<header id="navigationHeader"></header>
+
+<nav class="navbar navbar-inverse" style="background-color:#ffffff; font-color: #eeeeee;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="index.html">HomeGrowMaster</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">My Garden <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="dnd_editToNormal.html">Garden Planner</a></li>
+          <li><a href="harvest_diary.html">Harvest Diary</a></li>
+          <li><a href="myphoto.html">My Photo</a></li>
+        </ul>
+      </li>
+      <li><a href="plantsearch.html">Plant Search</a></li>
+      <li><a href="lifestyle.html">Lifestyle</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+      <li><a id="signupbtn" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a id="mybtn" href="#mymodal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <p></p>
+      <div class="general top-container">
+      <br>
+          <h2 class="h2title">Welcome to Home Grow Master</h2>
+          <p>Home Grow Master is a new gardening platform for gardeners to plan and organise your garden. 
+          </p>
+          <hr>
+        <div class="subscribeDiv">
+          <p><input type="checkbox" name="subscribe"> Subscribe to the email alert for plant watering and plant information.</p>
+          <p>The alert is sent out every week. Check out our past newsletters if you want to see the sort of thing we'll send you. Of course, we'll never spam you or sell your email address, and you can unsubscribe any time.
+          </p>
+        </div>
+      </div>
+</div>
+
+<!--modal-->
+<div id="mymodal" class="modal">
+    <form class="modalLogin" action="signInForm.php" method="POST">
+      <div class="modal-content">
+        <span class="close" onclick="document.getElementById('mymodal').style.display ='none'">&times;</span>
+        <h4>Login</h4>
+        
+        <label>Username</label>
+        <input type="text" class="formGp" placeholder="enter your username" id="username">
+        <br>
+        <label>Password</label>
+        <input type="password" class="formGpPass" placeholder="enter your password" id="password">
+        <button class="unmask" type="button" title="mask/unmask password" onclick="unmask()">Unmask</button>
+        <br>
+        <button type="submit" id="login" value="login">Login</button>
+        <hr>
+        </div>
+        <div class="pwd-group">
+        <input type="checkbox" checked="checked"> Remember Me
+        <p><a href="#">Forget Password</a></p>
+        <button type="button" class="cancelbtn" onclick="document.getElementById('mymodal').style.display ='none'">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--modal for sign up-->
+  <div id="mymodalsignup" class="modal">
+    <form class="modalSignUp" action="signup.php" method="POST">
+      <div class="modal-content">
+        <span class="close" onclick="document.getElementById('mymodalsignup').style.display='none'">&times;</span>
+        <h4>Sign Up</h4>
+        <label>Username</label>
+        <input type="text" class="formGp" placeholder="enter your email" id='signUser'>
+        <br>
+        <label>Email</label>
+        <input type="text" class="formGp" placeholder="enter your email" id=signEmail>
+        <br/>
+        <label>Password</label>
+        <input type="password" class="formGpPass" placeholder="enter your password" id="signpwd">
+        <button class="unmask" type="button" title="mask/unmask password" onclick="unmaskSignup()">Unmask</button>
+        <br>
+        <br>
+        <button type="submit" id="register" value="register">Create an Account</button>
+        <br>
+        <hr>       
+        <button type="button" class="cancelbtn" onclick="document.getElementById('mymodalsignup').style.display ='none'">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+<script>
+$(document).ready(function(){
+    signUpFunction();
+    signInFunction();
+});
+
+  //for sign in 
+  var modal = document.getElementById('mymodal');
+  var btn= document.getElementById('mybtn');
+
+  btn.onclick = function(){
+    modal.style.display ="block";
+  }
+
+  window.onclick = function(event){
+    if(event.target == modal){
+      modal.style.display ="none";
+    }
+  }
+
+  //for sign up
+  var signupmodal = document.getElementById('mymodalsignup');
+  var mysignupbtn = document.getElementById('signupbtn');
+  // var span = document.getElementsByClassName("close")[0];
+  mysignupbtn.onclick = function(){
+    signupmodal.style.display = "block";
+  }
+
+  window.onclinck = function(event){
+    if(event.target == signupmodal){
+      signupmodal.style.display = "none";
+    }
+  }
+
+
+
+//mask password for sign in and sign up
+  function unmask(){
+    var passUnmask = document.getElementById('password').type = 'text';
+    var passValue = password.value;
+      console.log(passValue);
+      $('.unmask').on('click', function(){
+        if(password.type =='password'){
+          password.type ='text';
+        }
+        else{
+          password.type = 'password';
+        }
+        password.value = passValue;
+      });
+  }       
+
+  function unmaskSignup(){
+    var passUnmask = document.getElementById('signpwd').type = 'text';
+    var passValue = signpwd.value;
+      console.log(passValue);
+      $('.unmask').on('click', function(){
+        if(signpwd.type =='password'){
+          signpwd.type ='text';
+        }
+        else{
+          signpwd.type = 'password';
+        }
+        signpwd.value = passValue;
+      });
+  } 
+
+//login form connect to php
+function signInFunction(){
+      $('#login').submit(function(){
+      var username = $('#username').val();
+      var password = $('#password').val();
+      if(username !='' && password !=''){
+       // ev.preventDefault;
+        consloe.log(username)
+        $.ajax({
+          method:"POST",
+          url:"signInForm.php",
+          data:{username:username,password:password},
+          success:function(data){
+            if(data =='No')
+            {
+              alert("wrong data");
+            }
+            else{
+              $('#mymodal').hide();
+              location.reload();
+            }
+          }
+        });
+      }
+      else{
+        alert("Please enter username and password!");
+      }
+      return false;
+    });
+}
+
+//signup form connect to php
+function signUpFunction(){
+      $('#register').submit(function(){
+      var username = $('#signUser').val();
+      var email = $('#signEmail').val();
+      var password = $('#signPwd').val();
+      console.log(username,email,password)
+      registerValidation();
+      if(username !='' && password !='' && email!=''){
+        $.ajax({
+          url:"signup.php",
+          method:"POST",
+          data:{username:username, password:password, email:email},
+          success:function(data){
+            if(data =='No')
+            {
+              alert("your account is created");
+            }
+            else{
+              $('#mymodal').hide();
+              location.reload();
+            }
+          }
+        });
+      }
+      else{
+        alert("Please enter username and password!");
+      }
+      return false;
+    });
+}
+// function registerValidation(){
+//     var valid = true;
+//     var regex =  /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+//     var passregex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/ ;
+
+//     if($.trim(username.val())===""){
+//       username.css('border-color','red');
+//       valid = false;
+//     }
+//     if(!regex.test(email.val())){
+//       email.css('border-color','red');
+//       valid = false;
+//     }
+//     if($.trim(password.val()==="" | $.trim(!passregex.test(password.val())))){
+//       password.css('border-color','red')
+//       alert("password needs at least 8 letters with 1 capital letter, small letter and special letter");
+//       valid = false;
+//     }
+// }
+</script>
+<script src="jquery.ui.touch-punch.min.js"></script>
+</body>
+</html>

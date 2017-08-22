@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home Garden</title>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 	 <style>
+		.gallery-content{
+			width:500px;
+			height:500px;
+			border:1px solid black;
+			background:lightgreen;
+		}
+	</style>
+</head>
+
+	 <body>
+	 <h1 id="photogallery">Photo Gallery</h1>
+	 	<div class = "gallery-content">
+	 		
+	 	</div>
+	 <script>
+		$.ajax({
+			type:"GET",
+			url:'dbimage.php',
+			data:'page',
+			success:function(data){
+				var evaluateddata = eval('('+ data +')');
+				$.each(evaluateddata, function(index, val){
+					console.log(data)
+					$('gallery-content').append("<img src=" + val + " alt='Thumbnail'/> ");
+					console.log(val);
+					//$('.gallery-content').html(data;)
+				});
+			}
+		});
+		
+	</script>
+	 </body>
+ </html>
